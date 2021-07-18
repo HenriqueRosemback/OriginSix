@@ -15,19 +15,18 @@ for (const link of links) {
 }
 
 /* aplicar sombra no header ao rolar a pagina */
+function changeHeaderWhenScroll() {
+  const header = document.querySelector('#header')
+  const navHeight = header.offsetHeight
 
-const header = document.querySelector('#header')
-const navHeight = header.offsetHeight
-
-window.addEventListener('scroll', function () {
   if (window.scrollY >= navHeight) {
     header.classList.add('scroll')
   } else {
     header.classList.remove('scroll')
   }
-})
+}
 
-/* TESTIMONIALS SWIPER */
+/* TESTIMONIALS carrossel SWIPER */
 const swiper = new Swiper('.swiper-container', {
   slidesPerView: 1,
   pagination: {
@@ -37,7 +36,7 @@ const swiper = new Swiper('.swiper-container', {
   keyboard: true
 })
 
-/* scroll reveal */
+/* scroll reveal efeitos na pagina quando der o scroll */
 
 const scrollReveal = ScrollReveal({
   origin: 'top',
@@ -47,6 +46,23 @@ const scrollReveal = ScrollReveal({
 })
 
 scrollReveal.reveal(
-  `#home .text, #home .image, #about .image, #about .text, #services header, #services .card, #testimonials header, #testimonials .testimonials, #contact .text, #contact .links`,
+  `#home .text, #home .image, #about .image, #about .text, #services header, #services .card, #testimonials header, #testimonials .testimonials, #contact .text, #contact .links, footer .brand, footer .social`,
   { interval: 100 }
 )
+
+/***** botão voltar ao topo  ******/
+function backToTopButton() {
+  const backToTopButton = document.querySelector('.back-to-top')
+
+  if (this.window.scrollY >= 560) {
+    backToTopButton.classList.add('show')
+  } else {
+    backToTopButton.classList.remove('show')
+  }
+}
+
+/****** When Scroll ******/
+window.addEventListener('scroll', function () {
+  changeHeaderWhenScroll()
+  backToTopButton()
+})
